@@ -10,7 +10,7 @@ $ BDEx.get_geneset("msigdb","HALLMARK_APOPTOSIS")
 Example:
 $ BDEx.get_data("Depmap_21Q4","sample_info")
 
-The following lists are currently supported.
+The following lists are currently supported.<br />
 Depmap_21Q4,CCLE_gene_cn<br />
 Depmap_21Q4,CCLE_expression<br />
 Depmap_21Q4,CCLE_mutation<br />
