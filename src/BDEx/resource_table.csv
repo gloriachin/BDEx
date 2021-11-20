@@ -1,0 +1,12 @@
+Dataset,Table,URL,source
+Depmap_21Q4,CCLE_gene_cn,https://ndownloader.figshare.com/files/31315924,https://depmap.org/portal/download/
+Depmap_21Q4,CCLE_expression,https://ndownloader.figshare.com/files/31315882,https://depmap.org/portal/download/
+Depmap_21Q4,CCLE_mutation,https://ndownloader.figshare.com/files/31315930,https://depmap.org/portal/download/
+Depmap_21Q4,sample_info,https://ndownloader.figshare.com/files/31316011,https://depmap.org/portal/download/
+Depmap_21Q4,CRISPR_gene_effect,https://ndownloader.figshare.com/files/31315996,https://depmap.org/portal/download/
+Depmap_21Q4,CRISPR_gene_dependency,https://ndownloader.figshare.com/files/31315990,https://depmap.org/portal/download/
+Depmap_21Q4,CRISPR_common_essentials,https://ndownloader.figshare.com/files/31315984,https://depmap.org/portal/download/
+Depmap_21Q4,common_essentials,https://ndownloader.figshare.com/files/31315981,https://depmap.org/portal/download/
+DEMETER2_V6,sample_info,https://ndownloader.figshare.com/files/11489717,https://depmap.org/portal/download/
+DEMETER2_V6,D2_DRIVE_gene_dep_scores,https://ndownloader.figshare.com/files/11489693,https://depmap.org/portal/download/
+DEMETER2_V6,D2_combined_gene_dep_scores,https://ndownloader.figshare.com/files/11489693,https://depmap.org/portal/download/
