@@ -13,7 +13,7 @@ def get_geneset(source, pathway_name):
     return(genesets)
 
 def get_data(Dataset, tableName):
-    resource_table = pd.read_csv("resource_table.csv")
+    resource_table = pd.read_csv("https://github.com/gloriachin/BDEx/blob/main/src/BDEx/resource_table.csv")
     #print(resource_table['Dataset'])
     url = ''
     if Dataset in set(resource_table['Dataset'].values):
