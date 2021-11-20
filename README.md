@@ -23,3 +23,11 @@ Depmap_21Q4,common_essentials<br />
 DEMETER2_V6,sample_info<br />
 DEMETER2_V6,D2_DRIVE_gene_dep_scores<br />
 DEMETER2_V6,D2_combined_gene_dep_scores<br />
+
+# Notes:
+This datasets are identical with the orignal data resource. Users should acknolwege the data generators and use the data according to the owner's guidence. 
+
+Link to the data resources:<br />
+https://depmap.org/portal/<br />
+https://www.gsea-msigdb.org/gsea/msigdb/<br />
+
