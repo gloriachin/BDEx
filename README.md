@@ -1,5 +1,12 @@
 # Usage:
 
+To check the latest version of the package, please check https://test.pypi.org/project/BDEx/
+
+Intall using pip:<br />
+pip install -i https://test.pypi.org/simple/ BDEx <br />
+
+Run the following examples in python3 environment.<br />
+
 $ from BDEx import get_geneset_data
 
 
