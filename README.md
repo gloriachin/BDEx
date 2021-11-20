@@ -1,14 +1,15 @@
 # Usage:
 
-$ from genesets import get_geneset
+$ from BDEx import get_geneset_data
+
 
 ## get genesets from msidgdb
 Example
-$ BDEx.get_geneset("msigdb","HALLMARK_APOPTOSIS")
+$ get_geneset_data.get_geneset("msigdb","HALLMARK_APOPTOSIS")
 
 ## get datasets from Depmap/CCLE etc
 Example:
-$ BDEx.get_data("Depmap_21Q4","sample_info")
+$ get_geneset_data.get_data("Depmap_21Q4","sample_info")
 
 The following lists are currently supported.<br />
 Depmap_21Q4,CCLE_gene_cn<br />
