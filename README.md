@@ -45,6 +45,7 @@ Currently provided modules:
 ## 1, spearman correlation by given a dictionary type.<br />
 $ ana.measure_cor_spearman_batch(); see example below.<br />
 
+It allows a faster computation especially with large number of subjects, such as the correlation for all genes. 
 ## 2, check the similarity of genes or sample similarity from the co-expression results.<br />
 $ ana.check_gene_groups_from_correlation(); see example below.<br />
 
