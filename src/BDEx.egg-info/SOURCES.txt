@@ -1,12 +1,18 @@
+.gitignore
 LICENSE
 MANIFEST.in
 README.md
+build.sh
 pyproject.toml
 setup.cfg
 data/resource_table.csv
 src/BDEx/__init__.py
+src/BDEx/ana.py
 src/BDEx/get_geneset_data.py
 src/BDEx.egg-info/PKG-INFO
 src/BDEx.egg-info/SOURCES.txt
 src/BDEx.egg-info/dependency_links.txt
 src/BDEx.egg-info/top_level.txt
+src/tests/test.ipynb
+src/tests/.ipynb_checkpoints/BDEx test-checkpoint.ipynb
+src/tests/.ipynb_checkpoints/test-checkpoint.ipynb

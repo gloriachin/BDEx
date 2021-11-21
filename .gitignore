@@ -1,2 +1,4 @@
 /dist
 /src/tests/.ipynb_checkpoints/BDEx test-checkpoint.ipynb
+/src/tests/.ipynb_checkpoints/test-checkpoint.ipynb
+/src/BDEx/__pycache__/
