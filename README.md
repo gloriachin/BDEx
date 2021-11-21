@@ -53,23 +53,23 @@ Example:<br />
 geneset = get_geneset_data.get_geneset("msigdb","HALLMARK_OXIDATIVE_PHOSPHORYLATION")<br />
 df =CCLE_expr<br />
 
-            col_names = []<br />
-            if "Unnamed: 0" in df.columns:<br />
-                for col in df.columns:<br />
-                    if col != "Unnamed: 0":<br />
-                        col_names.append(col.split(" ")[0])<br />
+            col_names = []
+            if "Unnamed: 0" in df.columns:
+                for col in df.columns:
+                    if col != "Unnamed: 0":
+                        col_names.append(col.split(" ")[0])
 
-                df.drop(columns=df.columns[0], <br />
-                        axis=1, <br />
-                        inplace=True)<br />
-            else:<br />
-                for col in df.columns:<br />
-                    if col != "Unnamed: 0":<br />
-                        col_names.append(col.split(" ")[0])<br />
+                df.drop(columns=df.columns[0], 
+                        axis=1, 
+                        inplace=True)
+            else:
+                for col in df.columns:
+                    if col != "Unnamed: 0":
+                        col_names.append(col.split(" ")[0])
 
-            df.columns = col_names<br />
-            geneset = list(set(geneset).intersection(set(col_names)))<br />
-            x = df.loc[:,geneset]<br />
+            df.columns = col_names
+            geneset = list(set(geneset).intersection(set(col_names)))
+            x = df.loc[:,geneset]
 
 dic_gene_epxr = ana.pd2dic(x)<br />
 result = ana.measure_cor_spearman_batch(dic_gene_epxr,geneset,geneset)<br />
