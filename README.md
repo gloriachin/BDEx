@@ -42,10 +42,11 @@ https://www.gsea-msigdb.org/gsea/msigdb/<br />
 
 Currently provided modules: 
 
-1, spearman correlation by given a dictionary type.<br />
+## 1, spearman correlation by given a dictionary type.<br />
 $ ana.measure_cor_spearman_batch(); see example below.<br />
-2, check the similarity of genes or sample similarity from the co-expression results.<br />
-$ ana.check_gene_groups_from_correlation(); see example below<br />
+
+## 2, check the similarity of genes or sample similarity from the co-expression results.<br />
+$ ana.check_gene_groups_from_correlation(); see example below.<br />
 
 Example:<br />
 geneset = get_geneset_data.get_geneset("msigdb","HALLMARK_OXIDATIVE_PHOSPHORYLATION")<br />
