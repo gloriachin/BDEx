@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: BDEx
-Version: 0.1.4
+Version: 0.1.6
 Summary: biomedical data exchange
 Home-page: https://github.com/gloriachin/BDEx
 Author: Guangrong Qin
@@ -59,32 +59,34 @@ https://www.gsea-msigdb.org/gsea/msigdb/<br />
 
 Currently provided modules: 
 
-1, spearman correlation by given a dictionary type.<br />
+## 1, spearman correlation by given a dictionary type.<br />
 $ ana.measure_cor_spearman_batch(); see example below.<br />
-2, check the similarity of genes or sample similarity from the co-expression results.<br />
-$ ana.check_gene_groups_from_correlation(); see example below<br />
+
+It allows a faster computation especially with large number of subjects, such as the correlation for all genes. 
+## 2, check the similarity of genes or sample similarity from the co-expression results.<br />
+$ ana.check_gene_groups_from_correlation(); see example below.<br />
 
 Example:<br />
 geneset = get_geneset_data.get_geneset("msigdb","HALLMARK_OXIDATIVE_PHOSPHORYLATION")<br />
 df =CCLE_expr<br />
 
-            col_names = []<br />
-            if "Unnamed: 0" in df.columns:<br />
-                for col in df.columns:<br />
-                    if col != "Unnamed: 0":<br />
-                        col_names.append(col.split(" ")[0])<br />
+            col_names = []
+            if "Unnamed: 0" in df.columns:
+                for col in df.columns:
+                    if col != "Unnamed: 0":
+                        col_names.append(col.split(" ")[0])
 
-                df.drop(columns=df.columns[0], <br />
-                        axis=1, <br />
-                        inplace=True)<br />
-            else:<br />
-                for col in df.columns:<br />
-                    if col != "Unnamed: 0":<br />
-                        col_names.append(col.split(" ")[0])<br />
+                df.drop(columns=df.columns[0], 
+                        axis=1, 
+                        inplace=True)
+            else:
+                for col in df.columns:
+                    if col != "Unnamed: 0":
+                        col_names.append(col.split(" ")[0])
 
-            df.columns = col_names<br />
-            geneset = list(set(geneset).intersection(set(col_names)))<br />
-            x = df.loc[:,geneset]<br />
+            df.columns = col_names
+            geneset = list(set(geneset).intersection(set(col_names)))
+            x = df.loc[:,geneset]
 
 dic_gene_epxr = ana.pd2dic(x)<br />
 result = ana.measure_cor_spearman_batch(dic_gene_epxr,geneset,geneset)<br />
