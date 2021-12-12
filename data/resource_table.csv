@@ -10,3 +10,6 @@ Depmap_21Q4,common_essentials,https://ndownloader.figshare.com/files/31315981,ht
 DEMETER2_V6,sample_info,https://ndownloader.figshare.com/files/11489717,https://depmap.org/portal/download/
 DEMETER2_V6,D2_DRIVE_gene_dep_scores,https://ndownloader.figshare.com/files/11489693,https://depmap.org/portal/download/
 DEMETER2_V6,D2_combined_gene_dep_scores,https://ndownloader.figshare.com/files/11489693,https://depmap.org/portal/download/
+CTD2_Fredhutch,Druggable_genome_library,https://ctd2-data.nci.nih.gov/Public/FHCRC-1/Ovarian_Druggable_Cisplatin/0001_sirna_library_hu_druggable_ov.txt,https://ocg.cancer.gov/programs/ctd2/data-portal
+CTD2_Fredhutch,Kinase_library,https://ctd2-data.nci.nih.gov/Public/FHCRC-1/PAAD_Kinome_Vehicle_Kemp_2013/sirna_library_hu_kinome_paad_0001.txt,https://ocg.cancer.gov/programs/ctd2/data-portal
+
