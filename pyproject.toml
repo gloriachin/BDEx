@@ -3,7 +3,10 @@ requires = [
     "numpy",
     "pandas",
     "statsmodels",
+    "scipy.stats",
     "matplotlib",
+    "statsmodels.stats",
+	"statsmodels",
 	"setuptools >=42"
 ]
 build-backend = "setuptools.build_meta"

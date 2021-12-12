@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: BDEx
-Version: 0.1.6
+Version: 0.2.0
 Summary: biomedical data exchange
 Home-page: https://github.com/gloriachin/BDEx
 Author: Guangrong Qin
@@ -91,4 +91,15 @@ df =CCLE_expr<br />
 dic_gene_epxr = ana.pd2dic(x)<br />
 result = ana.measure_cor_spearman_batch(dic_gene_epxr,geneset,geneset)<br />
 [g1,g2,g3] = ana.check_gene_groups_from_correlation(result,0.3)<br />
+
+
+# knowledge graph module (kg)
+### Query which genes are associated with sensitivity or resistance to a drug 
+kg.drug_response_KG_by_drug("JQ1","biolink:associated with sensitivity to")
+kg.drug_response_KG_by_drug("Cisplatin","biolink:associated with resistance to")
+
+### Query which drugs sensitivities are affected by the gene
+
+drug_response_KG_by_gene("EGFR","biolink:associated with sensitivity to")
+drug_response_KG_by_gene("KRAS","biolink:associated with resistance to")
 

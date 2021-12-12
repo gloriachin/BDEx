@@ -1,6 +1,9 @@
 from scipy import stats
 import pandas as pd
 import numpy as np
+from scipy.stats import distributions
+import statsmodels.stats
+from statsmodels.stats import multitest
 
 def rank_simple(vector):
     return sorted(range(len(vector)), key=vector.__getitem__)
@@ -160,3 +163,108 @@ def check_gene_groups_from_correlation(correlation_df,threshold_cor):
                     group3.add(correlation_df.iloc[i,1])
     group3 = group3 - group1 - group2
     return([list(group1), list(group2), list(group3)])
+
+
+def _normtest_finish(z, alternative):
+    """Common code between all the normality-test functions."""
+    if alternative == 'less':
+        prob = distributions.norm.cdf(z)
+    elif alternative == 'greater':
+        prob = distributions.norm.sf(z)
+    elif alternative == 'two-sided':
+        prob = 2 * distributions.norm.sf(np.abs(z))
+    else:
+        raise ValueError("alternative must be "
+                         "'less', 'greater' or 'two-sided'")
+    if z.ndim == 0:
+        z = z[()]
+    return z, prob
+
+def rank_sum_test_batch_CCLE(mut_samples, sele_expr_ranked, alternative):
+    '''
+    mut_samples: a selection of samples from the list
+    sele_expr_ranked: the expression of genes, two columns are included: 
+    1) sample ids; 2)expression values; index are ranked from 1 to N, where 1 means lower expression.
+    alternative: 'less' or 'greater' or 'two-sided'
+    '''
+    x_rank = list(sele_expr_ranked.loc[sele_expr_ranked['Unnamed: 0'].isin(mut_samples)].index)
+    s = np.sum(x_rank, axis=0)
+    n1 = len(mut_samples)
+    n2 = sele_expr_ranked.shape[0] - n1
+    expected = n1 * (n1 + n2 +1) / 2.0
+    z = (s - expected) / np.sqrt(n1*n2*(n1+n2+1)/12.0)
+    z, prob = _normtest_finish(z, alternative)
+    return([n1,n2,z,prob])
+
+def mut_dep_expr_CCLE(Sample_info, CCLE_mut, CCLE_expr, tumortype, alternative, mut_list, expr_list):
+    selected_disease = [tumortype] #Selection of tumor types to be analized.
+    selected_samples = list(set(Sample_info.loc[Sample_info['primary_disease'].isin(selected_disease) ]['DepMap_ID']))
+    selected_mut = CCLE_mut.loc[CCLE_mut['DepMap_ID'].isin(selected_samples)]
+
+    CCLE_expr.index = CCLE_expr['Unnamed: 0']
+    selected_expr = CCLE_expr.loc[CCLE_expr['Unnamed: 0'].isin(selected_samples)]
+
+    All_samples_with_m_e = list(set(selected_mut['DepMap_ID']).intersection(set(selected_expr['Unnamed: 0']))) #Selection of samples with both mutation data and expression data.
+
+    CCLE_functional = selected_mut.loc[selected_mut['Variant_Classification'].isin(['De_novo_Start_OutOfFrame',
+                                                                            'Frame_Shift_Del',
+                                                                            'Frame_Shift_Ins',
+                                                                            'Missense_Mutation',
+                                                                            'Nonsense_Mutation',
+                                                                            'Nonstop_Mutation',
+                                                                            'Splice_Site',
+                                                                            'Start_Codon_Del',
+                                                                            'Start_Codon_Ins',
+                                                                            'Start_Codon_SNP',
+                                                                            'Stop_Codon_Del',
+                                                                            'Stop_Codon_Ins'
+                                                                         ])] #Selection of potential functional genetical alterations
+
+    CCLE_functional = CCLE_functional.loc[CCLE_functional['DepMap_ID'].isin(All_samples_with_m_e)]
+    
+    # Start the analysis
+    result_expr = []
+    result_mut = []
+    result_mut_size = []
+    result_wt_size = []
+    result_z = []
+    result_p = []
+
+    dic_mut_samples = {}
+    for i in range(0,CCLE_functional.shape[0]):
+        symbol = CCLE_functional.iloc[i,0]
+        sample = CCLE_functional.iloc[i,15]
+        if symbol in dic_mut_samples:
+            dic_mut_samples[symbol].add(sample)
+        else:
+            dic_mut_samples[symbol] = set([sample])
+                
+    for gene_expr in set(list(set(selected_expr.columns) - set(["Unnamed: 0"]))).intersection(expr_list):
+        sele_expr = selected_expr.loc[All_samples_with_m_e,["Unnamed: 0",gene_expr]]
+        sele_expr_ranked = sele_expr.sort_values(by = [gene_expr])
+        sele_expr_ranked.index = range(1,sele_expr_ranked.shape[0]+1) #we will rank the data dataframe by gene expression first, so we don't need to rank it for multiple times
+
+        for mut in set(dic_mut_samples.keys()).intersection(mut_list):
+            if len(dic_mut_samples[mut]) > 3:
+                mut_samples = dic_mut_samples[mut]
+                result = rank_sum_test_batch_CCLE(mut_samples, sele_expr_ranked, alternative)
+                #result[3] < 0.05:
+                result_expr.append(gene_expr.split(' ')[0])
+                result_mut.append(mut)
+                result_mut_size.append(result[0])
+                result_wt_size.append(result[1])
+                result_z.append(result[2])
+                result_p.append(result[3])
+
+    Final = pd.DataFrame({"Gene_expr":result_expr,
+                          "Gene_mut":result_mut,
+                          "mut_size":result_mut_size,
+                          "wt_size":result_wt_size,
+                          "z":result_z,
+                          "p":result_p
+                         })
+    if len(list(Final['p'])) > 0:
+        fdr_list = multitest.multipletests(list(Final['p']),  alpha=0.05, method='fdr_bh', is_sorted=False, returnsorted=False)[1]
+        Final['fdr'] = fdr_list
+    Final['Disease'] = [tumortype] * Final.shape[0]
+    return(Final)
