@@ -12,4 +12,6 @@ DEMETER2_V6,D2_DRIVE_gene_dep_scores,https://ndownloader.figshare.com/files/1148
 DEMETER2_V6,D2_combined_gene_dep_scores,https://ndownloader.figshare.com/files/11489693,https://depmap.org/portal/download/
 CTD2_Fredhutch,Druggable_genome_library,https://ctd2-data.nci.nih.gov/Public/FHCRC-1/Ovarian_Druggable_Cisplatin/0001_sirna_library_hu_druggable_ov.txt,https://ocg.cancer.gov/programs/ctd2/data-portal
 CTD2_Fredhutch,Kinase_library,https://ctd2-data.nci.nih.gov/Public/FHCRC-1/PAAD_Kinome_Vehicle_Kemp_2013/sirna_library_hu_kinome_paad_0001.txt,https://ocg.cancer.gov/programs/ctd2/data-portal
-
+GDSC,expression,https://www.cancerrxgene.org/gdsc1000/GDSC1000_WebResources//Data/preprocessed/Cell_line_RMA_proc_basalExp.txt.zip
+GDSC,drug,https://www.cancerrxgene.org/gdsc1000/GDSC1000_WebResources//Data/suppData/TableS4A.xlsx
+GRtf,TF_Target,https://genome.cshlp.org/content/suppl/2021/03/02/gr.240663.118.DC2/Revised_Supplemental_Table_S3.csv
